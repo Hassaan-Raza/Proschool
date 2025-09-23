@@ -1,0 +1,234 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Task Management App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="login-btn">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="register-btn">Register</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Task Management App</h1>
+                <p>Welcome to the Task Management App. Please login or register to access your tasks.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" class="form-control" id="username" placeholder="Enter username">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" id="password" placeholder="Enter password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" class="form-control" id="username" placeholder="Enter username">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" id="password" placeholder="Enter password">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirm Password:</label>
+                        <input type="password" class="form-control" id="confirm-password" placeholder="Confirm password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+```
+
+```javascript
+// script.js
+$(document).ready(function() {
+    // Login form submission
+    $('#login-form').submit(function(e) {
+        e.preventDefault();
+        var username = $('#username').val();
+        var password = $('#password').val();
+        $.ajax({
+            type: 'POST',
+            url: '/login',
+            data: {username: username, password: password},
+            success: function(data) {
+                if (data.success) {
+                    window.location.href = '/tasks';
+                } else {
+                    alert('Invalid credentials');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    });
+
+    // Register form submission
+    $('#register-form').submit(function(e) {
+        e.preventDefault();
+        var username = $('#username').val();
+        var email = $('#email').val();
+        var password = $('#password').val();
+        var confirmPassword = $('#confirm-password').val();
+        if (password !== confirmPassword) {
+            alert('Passwords do not match');
+            return;
+        }
+        $.ajax({
+            type: 'POST',
+            url: '/register',
+            data: {username: username, email: email, password: password},
+            success: function(data) {
+                if (data.success) {
+                    window.location.href = '/login';
+                } else {
+                    alert('Registration failed');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    });
+});
+```
+
+```python
+# server.py
+from flask import Flask, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.db'
+db = SQLAlchemy(app)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(120), nullable=False)
+
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.json['username']
+    password = request.json['password']
+    user = User.query.filter_by(username=username).first()
+    if user and user.password == password:
+        return jsonify({'success': True})
+    return jsonify({'success': False})
+
+@app.route('/register', methods=['POST'])
+def register():
+    username = request.json['username']
+    email = request.json['email']
+    password = request.json['password']
+    user = User(username=username, email=email, password=password)
+    db.session.add(user)
+    db.session.commit()
+    return jsonify({'success': True})
+
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+```css
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+.row {
+    margin-bottom: 20px;
+}
+
+.col-md-6 {
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+
+button[type="submit"] {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #3e8e41;
+}
+```

@@ -1,0 +1,25 @@
+```
+# Requirements for file management and batch processing CLI tool
+
+# Core dependencies
+click==8.0.4
+colorama==0.4.4
+pytz==2022.2.1
+python-dateutil==2.8.2
+
+# File management dependencies
+PyYAML==6.0
+pathlib==1.0.1
+pathspec==0.9.0
+
+# Batch processing dependencies
+schedule==1.1.0
+apscheduler==3.9.1
+
+# Logging and error handling dependencies
+loguru==0.5.0
+python-socketio==5.1.0
+
+# Optional dependencies
+argcomplete==1.12.3
+```

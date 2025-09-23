@@ -1,0 +1,281 @@
+```css
+/* 
+ * style.css
+ * 
+ * This CSS file is responsible for styling the task management web application.
+ * It includes all necessary imports, dependencies, and comprehensive comments.
+ * 
+ * Author: [Your Name]
+ * Date: [Current Date]
+ */
+
+/* Import necessary dependencies */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Icons&display=swap');
+
+/* Global Styles */
+
+/* Set the font family and font size for the entire application */
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Set the background color and text color for the application */
+body {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+/* Set the maximum width for the application */
+.max-width {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header Styles */
+
+/* Style the header */
+.header {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+/* Style the logo */
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* Style the navigation menu */
+.nav-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Style the navigation menu items */
+.nav-menu-item {
+  margin-right: 20px;
+}
+
+/* Style the navigation menu item links */
+.nav-menu-item a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+/* Style the navigation menu item links on hover */
+.nav-menu-item a:hover {
+  color: #ccc;
+}
+
+/* Style the navigation menu item links on active */
+.nav-menu-item a.active {
+  color: #fff;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Style the navigation menu item dropdown */
+.nav-menu-item-dropdown {
+  position: absolute;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 5px;
+  display: none;
+}
+
+/* Style the navigation menu item dropdown on hover */
+.nav-menu-item:hover .nav-menu-item-dropdown {
+  display: block;
+}
+
+/* Style the navigation menu item dropdown links */
+.nav-menu-item-dropdown a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+/* Style the navigation menu item dropdown links on hover */
+.nav-menu-item-dropdown a:hover {
+  color: #ccc;
+}
+
+/* Style the navigation menu item dropdown links on active */
+.nav-menu-item-dropdown a.active {
+  color: #fff;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Main Content Styles */
+
+/* Style the main content container */
+.main-content {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the main content header */
+.main-content-header {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Style the main content header title */
+.main-content-header-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Style the main content header description */
+.main-content-header-description {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Style the main content body */
+.main-content-body {
+  padding: 20px;
+}
+
+/* Style the main content body text */
+.main-content-body p {
+  margin-bottom: 20px;
+}
+
+/* Style the main content body links */
+.main-content-body a {
+  color: #337ab7;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+/* Style the main content body links on hover */
+.main-content-body a:hover {
+  color: #23527c;
+}
+
+/* Style the main content body links on active */
+.main-content-body a.active {
+  color: #337ab7;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Style the main content footer */
+.main-content-footer {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Style the main content footer text */
+.main-content-footer p {
+  margin-bottom: 10px;
+}
+
+/* Style the main content footer links */
+.main-content-footer a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+/* Style the main content footer links on hover */
+.main-content-footer a:hover {
+  color: #ccc;
+}
+
+/* Style the main content footer links on active */
+.main-content-footer a.active {
+  color: #fff;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Error Handling */
+
+/* Style the error message */
+.error-message {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the error message text */
+.error-message p {
+  margin-bottom: 20px;
+}
+
+/* Style the error message links */
+.error-message a {
+  color: #337ab7;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+/* Style the error message links on hover */
+.error-message a:hover {
+  color: #23527c;
+}
+
+/* Style the error message links on active */
+.error-message a.active {
+  color: #337ab7;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Responsive Design */
+
+/* Style the navigation menu on small screens */
+@media (max-width: 768px) {
+  .nav-menu {
+    flex-direction: column;
+  }
+}
+
+/* Style the navigation menu item dropdown on small screens */
+@media (max-width: 768px) {
+  .nav-menu-item-dropdown {
+    position: relative;
+  }
+}
+
+/* Style the main content on small screens */
+@media (max-width: 768px) {
+  .main-content {
+    margin-top: 20px;
+  }
+}
+```

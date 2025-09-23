@@ -1,0 +1,168 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Content Summarizer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>AI Content Summarizer</h1>
+    </header>
+    <main>
+        <section id="input-section">
+            <h2>Enter URL or Text:</h2>
+            <input type="text" id="url-input" placeholder="Enter URL">
+            <button id="url-button">Summarize from URL</button>
+            <textarea id="text-input" placeholder="Enter text"></textarea>
+            <button id="text-button">Summarize from Text</button>
+        </section>
+        <section id="summary-section">
+            <h2>Summary:</h2>
+            <div id="summary"></div>
+        </section>
+        <section id="export-section">
+            <h2>Export Options:</h2>
+            <button id="export-pdf-button">Export as PDF</button>
+            <button id="export-txt-button">Export as Text</button>
+        </section>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.13.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/lstm@1.0.0/dist/lstm.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+```
+
+```javascript
+// script.js
+// Import necessary libraries
+const tf = require('@tensorflow/tfjs');
+const lstm = require('@tensorflow-models/lstm');
+
+// Define constants
+const SUMMARY_LENGTH = 100;
+const EXPORT_OPTIONS = ['pdf', 'txt'];
+
+// Get elements
+const urlInput = document.getElementById('url-input');
+const textInput = document.getElementById('text-input');
+const urlButton = document.getElementById('url-button');
+const textButton = document.getElementById('text-button');
+const summaryElement = document.getElementById('summary');
+const exportPdfButton = document.getElementById('export-pdf-button');
+const exportTxtButton = document.getElementById('export-txt-button');
+
+// Define functions
+async function summarizeFromUrl() {
+    const url = urlInput.value;
+    const response = await fetch(url);
+    const text = await response.text();
+    const summary = await summarizeText(text);
+    summaryElement.innerText = summary;
+}
+
+async function summarizeFromText() {
+    const text = textInput.value;
+    const summary = await summarizeText(text);
+    summaryElement.innerText = summary;
+}
+
+async function summarizeText(text) {
+    // Tokenize text
+    const tokens = tf.data.array(text.split(' '));
+
+    // Create LSTM model
+    const model = await lstm.load('https://storage.googleapis.com/tfjs-models/tfjs/lstm_model.json');
+
+    // Summarize text
+    const summary = await model.summarize(tokens, SUMMARY_LENGTH);
+
+    // Convert summary to string
+    const summaryString = summary.join(' ');
+
+    return summaryString;
+}
+
+// Add event listeners
+urlButton.addEventListener('click', summarizeFromUrl);
+textButton.addEventListener('click', summarizeFromText);
+exportPdfButton.addEventListener('click', () => {
+    const summary = summaryElement.innerText;
+    const blob = new Blob([summary], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'summary.pdf';
+    a.click();
+});
+exportTxtButton.addEventListener('click', () => {
+    const summary = summaryElement.innerText;
+    const blob = new Blob([summary], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'summary.txt';
+    a.click();
+});
+```
+
+```css
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1em;
+    text-align: center;
+}
+
+main {
+    max-width: 800px;
+    margin: 2em auto;
+    padding: 2em;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+section {
+    margin-bottom: 2em;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 1em;
+    margin-bottom: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #333;
+    color: #fff;
+    padding: 1em 2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #444;
+}
+
+#summary {
+    white-space: pre-wrap;
+}
+```
