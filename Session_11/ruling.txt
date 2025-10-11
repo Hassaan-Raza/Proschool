@@ -1,0 +1,60 @@
+IN THE HIGH COURT OF METROPOLIS
+
+Case No. 2022/CV/1453
+Between:
+MASON TECHNOLOGIES LTD. (Plaintiff)
+and
+OMNICORP INDUSTRIES (Defendant)
+
+Delivered on: 14 March 2022
+Presiding Judge: Justice Eleanor Graves
+
+---
+
+**Background**
+
+The Plaintiff, Mason Technologies Ltd., entered into a software development agreement with the Defendant, Omnicorp Industries, on 10 January 2020. The agreement required Mason Technologies to develop and deploy a proprietary logistics management platform within nine months.
+
+The Plaintiff contended that Omnicorp failed to provide timely technical specifications, resulting in project delays. Omnicorp, on the other hand, argued that Mason Technologies did not deliver a functional prototype within the agreed timeframe and that several milestones were missed.
+
+---
+
+**Issues for Determination**
+
+1. Whether Mason Technologies breached the contract by failing to meet delivery deadlines.
+2. Whether Omnicorp's actions contributed to the delay by withholding necessary technical data.
+3. The extent to which either party is entitled to damages.
+
+---
+
+**Findings**
+
+The Court found that Mason Technologies demonstrated consistent communication attempts seeking the required technical documentation. Evidence included emails and progress reports indicating that Omnicorp's engineering department delayed responses for over three months.
+
+Consequently, the Court held that the Plaintiff was prevented from fulfilling contractual obligations due to the Defendant’s failure to cooperate.
+
+---
+
+**Ruling**
+
+Justice Graves held that Omnicorp Industries materially breached the contract by failing to provide the required specifications in due time. The Plaintiff was awarded compensatory damages equivalent to the project’s remaining milestone payments, amounting to USD 250,000.
+
+---
+
+**Citations**
+
+The Court referred to:
+- *Anderson v. Stellar Logistics (2015) 2 MLJ 441* — on reciprocal obligations in contracts.
+- *Quantum Systems v. Rivera Holdings (2018) 4 MLR 209* — on the duty of good faith in commercial dealings.
+
+---
+
+**Order**
+
+Omnicorp Industries shall pay Mason Technologies Ltd. USD 250,000 in damages within 60 days of this judgment, along with court costs. No punitive damages are awarded.
+
+Delivered and signed at Metropolis this 14th day of March 2022.
+
+(Signed)
+Justice Eleanor Graves
+High Court of Metropolis
